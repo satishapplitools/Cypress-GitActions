@@ -1,0 +1,28 @@
+name: Testing
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  test-content:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Log Git SHA
+        run: echo "$GITHUB_SHA"
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - run: npm ci
+      - name: Set Applitools Batch ID from Git SHA
+        run: echo ::set-env name=APPLITOOLS_BATCH_ID::$(echo $GITHUB_SHA)
+      - run: npm run cypress:ci
+        env:
+          CONTENT_ROOT: ${{ secrets.CONTENT_ROOT }}
+          CONTENT_URL: ${{ secrets.CONTENT_URL }}
+          APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}

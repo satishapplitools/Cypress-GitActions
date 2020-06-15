@@ -1,0 +1,24 @@
+{
+  "name": "content-tester",
+  "version": "1.0.0",
+  "description": "Content Tests",
+  "scripts": {
+    "cypress:local": "cross-env NODE_ENV=dev node_modules/.bin/cypress open",
+    "cypress:ci": "node_modules/.bin/cypress run",
+    "lint": "node_modules/.bin/prettier-standard --lint",
+    "format": "node_modules/.bin/prettier-standard --format",
+    "check": "npm run format && npm run lint"
+  },
+  "author": "matt.lock@anz.com",
+  "private": true,
+  "dependencies": {
+    "@applitools/eyes-cypress": "^3.12.0",
+    "axios": "^0.19.2",
+    "cross-env": "^7.0.2",
+    "cypress": "^4.8.0",
+    "cypress-dotenv": "^1.2.1",
+    "dotenv-flow": "^3.1.0",
+    "jsonpath": "^1.0.2",
+    "prettier-standard": "^16.3.0"
+  }
+}
